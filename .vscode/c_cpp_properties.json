@@ -1,0 +1,21 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": [
+        "/home/simple_usr/114/boostproject/cppjieba/include",
+        "/home/simple_usr/114/boostproject/boost_1_92_0",
+        "/home/simple_usr/114/boostproject/cpp-httplib/httplib.h",
+        "/usr/local/include",
+        "/usr/include",
+        "/usr/include/boost"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/g++",
+      "cStandard": "c11",
+      "cppStandard": "c++11",
+      "intelliSenseMode": "linux-gcc-x64"
+    }
+  ],
+  "version": 4
+}

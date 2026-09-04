@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<style>html.fonts-loading{visibility:hidden;opacity:0}</style>
+<script>document.documentElement.classList.add('fonts-loading');</script>
+
+<link rel="preload" href="../../_/font/NotoSansDisplay.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" href="../../_/font/NotoSansDisplay-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" href="../../_/font/MonaspaceNeon-Var.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" href="../../_/font/MonaspaceXenon-Var.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+<script>
+(function() {
+  'use strict';
+  
+  var revealed = false;
+  
+  var reveal = function() {
+    if (revealed) return;
+    revealed = true;
+    document.documentElement.classList.remove('fonts-loading');
+  };
+  
+  setTimeout(reveal, 3000);
+  
+  if (!('FontFace' in window) || !('fonts' in document)) {
+    setTimeout(reveal, 100);
+    return;
+  }
+  
+  var uiRoot = '../../_';
+  var fonts = [
+    { 
+      family: 'Noto Sans', 
+      url: uiRoot + '/font/NotoSansDisplay.woff2',
+      descriptors: { style: 'normal', weight: '100 900', stretch: '62.5% 100%' }
+    },
+    { 
+      family: 'Noto Sans', 
+      url: uiRoot + '/font/NotoSansDisplay-Italic.woff2',
+      descriptors: { style: 'italic', weight: '100 900', stretch: '62.5% 100%' }
+    },
+    { 
+      family: 'Monaspace Neon', 
+      url: uiRoot + '/font/MonaspaceNeon-Var.woff2',
+      descriptors: { style: 'normal', weight: '400' }
+    },
+    { 
+      family: 'Monaspace Xenon', 
+      url: uiRoot + '/font/MonaspaceXenon-Var.woff2',
+      descriptors: { style: 'italic', weight: '400' }
+    }
+  ];
+  
+  var loadPromises = fonts.map(function(f) {
+    try {
+      var face = new FontFace(f.family, 'url("' + f.url + '")', f.descriptors);
+      return face.load().then(function(loaded) {
+        document.fonts.add(loaded);
+        return loaded;
+      }).catch(function() {
+        return null;
+      });
+    } catch (e) {
+      return Promise.resolve(null);
+    }
+  });
+  
+  Promise.all(loadPromises)
+    .then(function() {
+      return document.fonts.ready;
+    })
+    .then(reveal)
+    .catch(reveal);
+})();
+</script>    <title>Examples :: Boost Libraries Documentation</title>
+  <link rel="canonical" href="https://antora.cppalliance.org/master/lib/doc/msm/backmp11-back-end/examples.html">
+    <link rel="prev" href="../backmp11-back-end.html">
+    <link rel="next" href="../internals.html">
+  <meta name="generator" content="Antora 3.1.15">
+    <link rel="stylesheet" href="../../_/css/boostlook.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/vendor/tabs.css">
+    <script>
+    (function() {
+      if (window.self !== window.top) return;
+      var theme = localStorage.getItem('antora-theme');
+      if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = 'dark';
+      }
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+    })();
+    </script>
+    <script>var uiRootPath = '../../_'</script>
+<link rel="icon" href="../../_/img/favicons/favicon.ico" type="image/x-icon">
+    <!-- Favicon configuration -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../_/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../_/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../_/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="../../_/img/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="../../_/img/favicons/favicon.ico">
+  </head>
+  <body class="article toc2 toc-left">
+    <div class="boostlook">
+  <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs'; mermaid.initialize({"startOnLoad":true});</script> <div id="header">
+      <div id="toc" class="nav-container toc2" data-component="msm" data-version="">
+  <aside class="nav">
+    <button class="nav-close"></button>
+    <div class="panels">
+      <div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+      <div class="title-row">
+        <h3 class="title"><a href="../index.html">Boost.MetaStateMachine</a></h3>
+        <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme" style="display:none">
+  <i class="fas fa-sun theme-icon-light"></i>
+  <i class="fas fa-moon theme-icon-dark"></i>
+</button>      </div>
+      <ul class="nav-list">
+        <ul class="nav-list">
+        <li class="" data-depth="1">
+            <a class="nav-link" href="../index.html">Table of Contents</a>
+        </li>
+        <ul class="nav-list">
+        <li class="" data-depth="2">
+            <a class="nav-link" href="../preface.html">Preface</a>
+        </li>
+              <li class="" data-depth="2">
+            <a class="nav-link" href="../uml-short-guide.html">UML short guide</a>
+        </li>
+              <li class="" data-depth="2">
+            <a class="nav-link" href="../front-tutorial.html"><code>front</code> tutorial</a>
+        </li>
+        <ul class="nav-list">
+        <li class="" data-depth="3">
+            <a class="nav-link" href="../front-tutorial/basic-front-end.html">Basic front-end</a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../front-tutorial/functor-front-end.html">Functor front-end</a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../front-tutorial/puml-front-end.html"><code>puml</code> front-end (C++20, experimental)</a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../front-tutorial/euml-front-end.html"><code>euml</code> front-end (deprecated)</a>
+        </li>
+        </ul>
+        <li class="" data-depth="2">
+            <a class="nav-link" href="../back-back-end.html"><code>back</code> &amp; <code>back11</code> back-end</a>
+        </li>
+        <ul class="nav-list">
+        <li class="" data-depth="3">
+            <a class="nav-link" href="../back-back-end/examples.html">Examples</a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../back-back-end/performance-compilers.html">Performance / Compilers</a>
+        </li>
+        </ul>
+        <li class="" data-depth="2">
+            <a class="nav-link" href="../backmp11-back-end.html"><code>backmp11</code> back-end (C++17, experimental)</a>
+        </li>
+        <ul class="nav-list">
+        <li class=" is-current-page" data-depth="3">
+            <a class="nav-link" href="examples.html">Examples</a>
+        </li>
+        </ul>
+        <li class="" data-depth="2">
+            <a class="nav-link" href="../internals.html">Internals</a>
+        </li>
+              <li class="" data-depth="2">
+            <a class="nav-link" href="../acknowledgements.html">Acknowledgements</a>
+        </li>
+              <li class="" data-depth="2">
+            <a class="nav-link" href="../version-history.html">Version history</a>
+        </li>
+              <li class="" data-depth="2">
+            <a class="nav-link" href="../reference.html">Reference</a>
+        </li>
+        <ul class="nav-list">
+        <li class="" data-depth="3">
+            <a class="nav-link" href="../reference/boost/msm/backmp11.html"><code>backmp11</code></a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../reference/common-headers.html">Common headers</a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../reference/back-end-headers.html">Back-end headers</a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../reference/front-end-headers.html">Front-end headers</a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../reference/euml-operators-and-basic-helpers.html">eUML operators and basic helpers</a>
+        </li>
+              <li class="" data-depth="3">
+            <a class="nav-link" href="../reference/functional-programming.html">Functional programming</a>
+        </li>
+        </ul>
+  </ul>
+  </ul>
+  </ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+  </div>  <div id="content">
+      <aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+    <article class="doc max-width-reset">
+  <div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li>
+      <a href="../index.html" aria-label="Home: Boost.MetaStateMachine">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 -960 960 960" fill="#000000" aria-hidden="true"><path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/></svg>
+      </a>
+    </li>
+    <li><a href="../index.html">Table of Contents</a></li>
+    <li><a href="../backmp11-back-end.html"><code>backmp11</code> back-end (C++17, experimental)</a></li>
+    <li><a href="examples.html">Examples</a></li>
+  </ul>
+</nav>
+<div class="spirit-nav">
+    <a accesskey="p" href="../backmp11-back-end.html">
+      <span class="material-symbols-outlined" title="Previous: <code>backmp11</code> back-end (C++17, experimental)">arrow_back</span>
+    </a>
+    <a accesskey="u" href="../backmp11-back-end.html">
+      <span class="material-symbols-outlined" title="Up: <code>backmp11</code> back-end (C++17, experimental)">arrow_upward</span>
+    </a>
+    <a accesskey="n" href="../internals.html">
+      <span class="material-symbols-outlined" title="Next: Internals">arrow_forward</span>
+    </a>
+</div></div>
+    <h1 class="page">Examples</h1>
+  <div class="sect1">
+<h2 id="_back_adapter"><a class="anchor" href="#_back_adapter"></a><a href="../_attachments/backmp11/BackAdapter.cpp" class="xref attachment"><code>back</code> adapter</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example contains a state machine implementation with an API adapter that adheres to the <code>back::state_machine</code> interface.
+It is helpful for utilizing <code>backmp11</code> in a legacy code base.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_heapless_state_machine"><a class="anchor" href="#_heapless_state_machine"></a><a href="../_attachments/backmp11/HeaplessStateMachine.cpp" class="xref attachment">Heapless state machine</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example demonstrates a state machine configured for heapless execution.</p>
+</div>
+<div class="paragraph">
+<p>It uses <code>boost::container::static_vector</code> as the event pool container — a fixed-capacity replacement for the default <code>std::deque</code> container. Note that this container type does not support completion transitions; use a heapless deque (e.g. <code>etl::deque</code>) if those are required.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interruptible_state_machine"><a class="anchor" href="#_interruptible_state_machine"></a><a href="../_attachments/backmp11/InterruptibleStateMachine.cpp" class="xref attachment">Interruptible state machine</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example demonstrates a state machine extended with an interrupt mechanism.</p>
+</div>
+<div class="paragraph">
+<p>The state machine provides a public API to pause and resume its execution. This way it can be interrupted externally as well as internally through an event.
+It can immediately continue from where it was interrupted, since the interruption does not require a state change.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_logger"><a class="anchor" href="#_logger"></a><a href="../_attachments/backmp11/Logger.cpp" class="xref attachment">Logger</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example contains an observer implementation for logging state machine activities.
+The implementation logs the start of event processing and every processed transition.</p>
+</div>
+<div class="paragraph">
+<p>Running the example produces the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Starting state machine...
+MyStateMachine processed transition "none + starting -&gt; MyState" (handled)
+MyStateMachine processing event TransitionEvent
+MyStateMachine processed transition "MyState + TransitionEvent [ NotMyGuard ] / MyAction -&gt; MyOtherState" (rejected)
+MyStateMachine processed transition "MyState + TransitionEvent [ MyGuard ] / MyAction -&gt; MyOtherState" (handled)
+MyStateMachine processing event TransitionEvent
+MyStateMachine processed transition "MyOtherState + TransitionEvent -&gt; MyState" (handled)
+MyStateMachine processing event InternalTransitionEvent
+MyStateMachine processed transition "MyState + InternalTransitionEvent / MyAction" (handled)
+MyStateMachine processing event SmInternalTransitionEvent
+MyStateMachine processed transition "MyStateMachine + SmInternalTransitionEvent / MyAction" (handled)
+Stopping state machine...</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_serialization"><a class="anchor" href="#_serialization"></a>Serialization</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These examples demonstrate how to implement <code>reflect(&#8230;&#8203;)</code> methods to serialize a state machine.</p>
+</div>
+<div class="paragraph">
+<p>A serialization to JSON is particularly useful for inspecting a state machine&#8217;s overall state in a human-readable format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    "active_state_ids": [
+        1 // On
+    ],
+    "front_end": {
+        "brightness": 75
+    },
+    "machine_state": 1, // idle
+    "states": {
+        "1": {
+            "times_pressed": 1
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dimswitch_state_machine_used_by_all_examples"><a class="anchor" href="#_dimswitch_state_machine_used_by_all_examples"></a><a href="../_attachments/backmp11/serializer/DimSwitch.hpp" class="xref attachment"><code>DimSwitch</code> state machine</a> (used by all examples)</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_boost_serialization"><a class="anchor" href="#_boost_serialization"></a><a href="../_attachments/backmp11/serializer/BoostSerialization.cpp" class="xref attachment">Boost.Serialization</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="_boost_json"><a class="anchor" href="#_boost_json"></a><a href="../_attachments/backmp11/serializer/BoostJson.cpp" class="xref attachment">Boost.Json</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="_nlohmannjson"><a class="anchor" href="#_nlohmannjson"></a><a href="../_attachments/backmp11/serializer/NlohmannJson.cpp" class="xref attachment">nlohmann/json</a></h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_state_machine_interface"><a class="anchor" href="#_state_machine_interface"></a><a href="../_attachments/backmp11/StateMachineInterface.cpp" class="xref attachment">State machine interface</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example demonstrates how to establish a generic state machine interface with the <code>favor_compile_time</code> policy.</p>
+</div>
+<div class="paragraph">
+<p>Hiding a state machine behind an interface enables full encapsulation of its implementation — useful for improving compilation times, unit testing, and concealing proprietary logic when distributing pre-compiled libraries.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_visitor"><a class="anchor" href="#_visitor"></a><a href="../_attachments/backmp11/Visitor.cpp" class="xref attachment">Visitor</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example demonstrates the usage of a visitor.</p>
+</div>
+<div class="paragraph">
+<p>A jukebox can play 3 different types of songs. An active state visitor reports which song is currently playing. An all states visitor reports how many times each song has been played.</p>
+</div>
+</div>
+</div>
+  <div class="edit-this-page">
+      <a href="https://github.com/boostorg/msm/edit/develop/doc/modules/ROOT/pages/backmp11-back-end/examples.adoc">Edit this Page</a>
+      </div>
+      <nav class="pagination">
+        <span class="prev"><a href="../backmp11-back-end.html"><code>backmp11</code> back-end (C++17, experimental)</a></span>
+        <span class="next"><a href="../internals.html">Internals</a></span>
+    </nav>
+</article>
+</div>
+  <div id="footer">
+  <script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script async src="../../_/js/vendor/tabs.js" data-sync-storage-key="preferred-tab"></script>
+</div>
+</div>
+  </body>
+</html>

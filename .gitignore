@@ -1,0 +1,18 @@
+# 编译产物
+*.o
+parser
+debug
+http_server
+*.out
+
+# IDE.vscode/
+.idea/
+
+# 大文件/词典（关键！dict几百 MB 不能传）
+dict/
+data/input/
+data/raw.txt
+
+# 系统文件
+.DS_Store
+Thumbs.db

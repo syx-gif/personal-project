@@ -1,0 +1,1 @@
+智能指针测试    智能指针测试    shared_ptr 是 C++ 中的智能指针。    unique_ptr 也是智能指针的一种。https://www.boost.org/doc/libs/1_78_0/doc/html/test.html

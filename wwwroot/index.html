@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <title>boost 搜索引擎</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        html, body { height: 100%; }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+        /* 顶部标题 */
+        .container .logo {
+            text-align: center;
+            color: #4e6ef2;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        /* 搜索区 */
+        .container .search {
+            width: 100%;
+            height: 52px;
+        }
+        .container .search input {
+            float: left;
+            width: 600px;
+            height: 50px;
+            border: 1px solid #ccc;
+            border-right: none;
+            padding-left: 10px;
+            color: #333;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .container .search button {
+            float: left;
+            width: 150px;
+            height: 52px;
+            background-color: #4e6ef2;
+            color: #FFF;
+            font-size: 19px;
+            border: none;
+            cursor: pointer;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        .container .search button:hover {
+            background-color: #3a56d0;
+        }
+
+        /* 状态提示区（加载中 / 无结果 / 结果计数） */
+        .container .status {
+            width: 100%;
+            margin-top: 15px;
+            color: #999;
+            font-size: 13px;
+            display: none; /* 默认隐藏，有内容才显示 */
+        }
+
+        /* 结果区 */
+        .container .result { width: 100%; }
+        .container .result .item { margin-top: 20px; }
+        .container .result .item a {
+            display: block;
+            text-decoration: none;
+            font-size: 20px;
+            color: #4e6ef2;
+        }
+        .container .result .item a:hover { text-decoration: underline; }
+        .container .result .item p {
+            margin-top: 5px;
+            font-size: 16px;
+            color: #444;
+            line-height: 1.5;
+        }
+        .container .result .item i {
+            display: block;
+            font-style: normal;
+            color: green;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        /* 关键词高亮样式 */
+        mark {
+            background: #ffe58f;
+            color: #d4380d;
+            padding: 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">boost 搜索引擎</div>
+
+        <div class="search">
+            <input id="kw" type="text" placeholder="请输入搜索关键字">
+            <button onclick="Search()">搜索一下</button>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // 把关键词里可能影响正则的特殊字符转义掉（+ . * ? 等）
+        function escapeReg(str) {
+            return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // 把一段文本里的关键词用 <mark> 包起来（实现高亮）
+        function highlight(text, keyword) {
+            if (!keyword) return text;
+            var reg = new RegExp(escapeReg(keyword), 'gi');
+            return text.replace(reg, '<mark>$&</mark>');
+        }
+
+        function Search() {
+            // 1. 取输入框的值，并去掉首尾空格
+            var query = $("#kw").val().trim();
+
+            // 2. 空输入拦截：不发请求，直接提示
+            if (query === "") {
+                showStatus("请输入搜索关键字", "#d4380d");
+                return;
+            }
+
+            // 3. 显示"搜索中..."
+            showStatus("搜索中...", "#999");
+
+            // 4. 发 HTTP 请求给后端（接口路径不变）
+            $.ajax({
+                type: "GET",
+                url: "/s?word=" + query,
+                success: function (data) {
+                    BuildHtml(data, query);
+                },
+                error: function () {
+                    showStatus("请求失败，请确认 http_server 已启动", "#d4380d");
+                }
+            });
+        }
+
+        // 渲染结果
+        function BuildHtml(data, query) {
+            var result_label = $("#result");
+            result_label.empty();   // 清空旧结果
+
+            // 空结果：显示提示，不渲染列表
+            if (!data || data.length === 0) {
+                showStatus("没有找到相关结果", "#999");
+                return;
+            }
+
+            // 有结果：显示"共找到 N 条"
+            showStatus("共找到 " + data.length + " 条结果", "#999");
+
+            // 遍历每一条结果，动态生成 HTML
+            for (var elem of data) {
+                // 用 html() 而不是 text()，这样 <mark> 高亮才能生效
+                var a_label = $("<a>", {
+                    href: elem.url,
+                    target: "_blank"
+                }).html(highlight(elem.title, query));
+
+                var p_label = $("<p>").html(highlight(elem.desc, query));
+                var i_label = $("<i>").text(elem.url);
+
+                var div_label = $("<div>", { class: "item" });
+
+                a_label.appendTo(div_label);
+                p_label.appendTo(div_label);
+                i_label.appendTo(div_label);
+                div_label.appendTo(result_label);
+            }
+        }
+
+        // 显示/隐藏状态栏
+        function showStatus(text, color) {
+            var status = $("#status");
+            status.text(text).css("color", color).show();
+        }
+
+        // 支持按回车键搜索
+        $("#kw").on("keypress", function (e) {
+            if (e.key === "Enter") {
+                Search();
+            }
+        });
+    </script>
+</body>
+</html>

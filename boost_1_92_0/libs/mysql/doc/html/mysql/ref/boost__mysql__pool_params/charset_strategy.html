@@ -1,0 +1,66 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>pool_params::charset_strategy</title>
+<link rel="stylesheet" href="../../../../../../../doc/src/boostbook.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="../../../index.html" title="Chapter 1. Boost.MySQL">
+<link rel="up" href="../boost__mysql__pool_params.html" title="pool_params">
+<link rel="prev" href="connection_executor.html" title="pool_params::connection_executor">
+<link rel="next" href="../boost__mysql__pooled_connection.html" title="pooled_connection">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table cellpadding="2" width="100%"><tr>
+<td valign="top"><img alt="Boost C++ Libraries" width="277" height="86" src="../../../../../../../boost.png"></td>
+<td align="center"><a href="../../../../../../../index.html">Home</a></td>
+<td align="center"><a href="../../../../../../../libs/libraries.htm">Libraries</a></td>
+<td align="center"><a href="http://www.boost.org/users/people.html">People</a></td>
+<td align="center"><a href="http://www.boost.org/users/faq.html">FAQ</a></td>
+<td align="center"><a href="../../../../../../../more/index.htm">More</a></td>
+</tr></table>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="connection_executor.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../boost__mysql__pool_params.html"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../boost__mysql__pooled_connection.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h5 class="title">
+<a name="mysql.ref.boost__mysql__pool_params.charset_strategy"></a><a class="link" href="charset_strategy.html" title="pool_params::charset_strategy">pool_params::charset_strategy</a>
+</h5></div></div></div>
+<p>
+          <a class="indexterm" name="id87749"></a>
+Determines the character set used by connections
+          created by the pool.
+        </p>
+<h6>
+<a name="mysql.ref.boost__mysql__pool_params.charset_strategy.h0"></a>
+          <span class="phrase"><a name="mysql.ref.boost__mysql__pool_params.charset_strategy.synopsis"></a></span><a class="link" href="charset_strategy.html#mysql.ref.boost__mysql__pool_params.charset_strategy.synopsis">Synopsis</a>
+        </h6>
+<pre class="programlisting"><a class="link" href="../boost__mysql__pool_charset_strategy.html" title="pool_charset_strategy"><code class="literal">pool_charset_strategy</code></a> <span class="identifier">charset_strategy</span> <span class="special">{};</span>
+</pre>
+<h6>
+<a name="mysql.ref.boost__mysql__pool_params.charset_strategy.h1"></a>
+          <span class="phrase"><a name="mysql.ref.boost__mysql__pool_params.charset_strategy.description"></a></span><a class="link" href="charset_strategy.html#mysql.ref.boost__mysql__pool_params.charset_strategy.description">Description</a>
+        </h6>
+<p>
+          Controls how pooled connections manage their character set. Defaults to
+          <a class="link" href="../boost__mysql__pool_charset_strategy/set_to_utf8mb4.html" title="pool_charset_strategy::set_to_utf8mb4"><code class="computeroutput"><span class="identifier">pool_charset_strategy</span><span class="special">::</span><span class="identifier">set_to_utf8mb4</span></code></a>, which makes all
+          connections use <code class="computeroutput"><span class="identifier">utf8mb4</span></code>
+          by setting it explicitly.
+        </p>
+<p>
+          This is an advanced setting. Please read how character set tracking works
+          before changing it.
+        </p>
+</div>
+<div class="copyright-footer">Copyright © 2019-2024 Ruben Perez<p>
+        Distributed under the Boost Software License, Version 1.0. (See accompanying
+        file LICENSE_1_0.txt or copy at <a href="http://www.boost.org/LICENSE_1_0.txt" target="_top">http://www.boost.org/LICENSE_1_0.txt</a>)
+      </p>
+</div>
+<hr>
+<div class="spirit-nav">
+<a accesskey="p" href="connection_executor.html"><img src="../../../../../../../doc/src/images/prev.png" alt="Prev"></a><a accesskey="u" href="../boost__mysql__pool_params.html"><img src="../../../../../../../doc/src/images/up.png" alt="Up"></a><a accesskey="h" href="../../../index.html"><img src="../../../../../../../doc/src/images/home.png" alt="Home"></a><a accesskey="n" href="../boost__mysql__pooled_connection.html"><img src="../../../../../../../doc/src/images/next.png" alt="Next"></a>
+</div>
+</body>
+</html>
