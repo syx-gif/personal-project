@@ -1,2 +1,0 @@
-neighbors of 0: 1 2 3
-generator matches graph_traits: true

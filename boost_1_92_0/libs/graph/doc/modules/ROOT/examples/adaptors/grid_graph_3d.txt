@@ -1,3 +1,0 @@
-27 vertices, 108 edges
-corner (0,0,0) degree=3
-center (1,1,1) degree=6

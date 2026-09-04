@@ -1,1 +1,0 @@
-Exception: The graph must be a DAG.

@@ -1,1 +1,0 @@
-Largest common subgraph size: 3

@@ -1,2 +1,0 @@
-Start vertex: 0
-End vertex:   3

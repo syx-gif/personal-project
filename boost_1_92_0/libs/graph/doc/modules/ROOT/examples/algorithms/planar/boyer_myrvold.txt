@@ -1,2 +1,0 @@
-K4 is planar: true
-K5 is planar: false

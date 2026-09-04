@@ -9,6 +9,10 @@ http_server
 .vscode/
 .idea/
 
+# 第三方库源码（不要上传！）
+boost_1_92_0/
+cppjieba/
+
 # 大文件：词典 +原始 HTML +清洗后文本
 dict/
 data/input/

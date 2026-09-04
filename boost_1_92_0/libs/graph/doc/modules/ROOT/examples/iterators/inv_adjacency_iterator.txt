@@ -1,1 +1,0 @@
-predecessors of 0: 1 2 3

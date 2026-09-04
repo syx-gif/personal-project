@@ -1,1 +1,0 @@
-BFS discovery order: 0 1 2 3 4 

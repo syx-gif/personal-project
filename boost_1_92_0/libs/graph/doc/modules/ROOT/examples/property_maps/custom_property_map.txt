@@ -1,4 +1,0 @@
-vertex 0 = A
-vertex 1 = B
-vertex 2 = C
-vertex 3 = D
